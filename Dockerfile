@@ -1,15 +1,15 @@
-FROM debian:latest
+FROM debian:bookworm-slim
 
 RUN apt-get update && apt-get install -y \
-    git \
-    python3 \
-    python3-pip \
-    sudo \
-    build-essential \
-    gcc-arm-none-eabi \
-    libnewlib-arm-none-eabi \
-    avrdude \
-    dfu-util
+  git \
+  python3 \
+  python3-pip \
+  sudo \
+  build-essential \
+  gcc-arm-none-eabi \
+  libnewlib-arm-none-eabi \
+  avrdude \
+  dfu-util
 
 RUN python3 -m pip install qmk appdirs --break-system-packages
 

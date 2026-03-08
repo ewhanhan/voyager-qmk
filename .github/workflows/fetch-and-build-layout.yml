@@ -36,9 +36,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: oryx
-
-      - name: Download the full history for the merge to work correctly
-        run: git pull --unshallow
+          fetch-depth: 0
 
       - name: Download layout source
         id: download-layout-source
@@ -76,7 +74,6 @@ jobs:
           git fetch origin main
           git checkout -B main origin/main
           git merge -Xignore-all-space oryx
-          git push
 
       - name: Update QMK firmware submodule to latest version (${{ steps.download-layout-source.outputs.firmware_version }})
         run: |
@@ -114,7 +111,7 @@ jobs:
             make ${make_prefix}${{ github.event.inputs.layout_geometry }}:${{ github.event.inputs.layout_id }}
           "
 
-          # Find and export built layout          
+          # Find and export built layout
           normalized_layout_geometry="$(echo "${{ github.event.inputs.layout_geometry }}" | sed 's/\//_/g')"
           echo built_layout_file=$(find ./qmk_firmware -maxdepth 1 -type f -regex ".*${normalized_layout_geometry}.*\.\(bin\|hex\)$") >> "$GITHUB_OUTPUT"
           echo normalized_layout_geometry=${normalized_layout_geometry} >> "$GITHUB_OUTPUT"
