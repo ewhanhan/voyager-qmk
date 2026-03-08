@@ -12,4 +12,4 @@ ZSA Voyager 40-key firmware — Oryx layout with custom QMK features.
 
 **Edit layout in Oryx** as usual — add a note in the "Some notes about what you changed" field (used as the commit message), then click **Compile this layout**.
 
-**Build firmware** by running the GitHub Action, then flash with [Keymapp](https://www.zsa.io/flash#flash-keymapp).
+**Build firmware** by running `./scripts/build.sh` — this triggers the GitHub Action, waits for it to finish, and pulls the result. Then flash with [Keymapp](https://www.zsa.io/flash#flash-keymapp).
